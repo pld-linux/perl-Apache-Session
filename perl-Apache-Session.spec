@@ -1,12 +1,11 @@
+%include	/usr/lib/rpm/macros.perl
 %define	pdir	Apache
 %define	pnam	Session
-%include	/usr/lib/rpm/macros.perl
 Summary:	Apache-Session perl module
 Summary(pl):	Modu³ perla Apache-Session
 Name:		perl-Apache-Session
 Version:	1.54
-Release:	3
-
+Release:	4
 License:	GPL
 Group:		Development/Languages/Perl
 Source0:	ftp://ftp.perl.org/pub/CPAN/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
@@ -23,7 +22,7 @@ Apache-Session perl module.
 Modu³ perla Apache-Session.
 
 %prep
-%setup -q -n Apache-Session-%{version}
+%setup -q -n %{pdir}-%{pnam}-%{version}
 
 %build
 perl Makefile.PL
