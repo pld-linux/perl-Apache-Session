@@ -31,9 +31,9 @@ perl Makefile.PL
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
-install eg/example.perl $RPM_BUILD_ROOT%{_examplesdir}/%{name}
+install eg/example.perl $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 gzip -9nf README CHANGES
 
@@ -46,4 +46,4 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitelib}/Apache/Session
 %{perl_sitelib}/Apache/Session.pm
 %{_mandir}/man3/*
-%{_examplesdir}/%{name}/example.perl
+%{_examplesdir}/%{name}-%{version}
