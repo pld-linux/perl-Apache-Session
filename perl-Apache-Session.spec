@@ -45,5 +45,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %{perl_sitelib}/Apache/Session
+%{perl_sitelib}/Apache/Session.pm
 %{_mandir}/man3/*
 %{_examplesdir}/%{name}/example.perl
