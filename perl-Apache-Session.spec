@@ -33,55 +33,20 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautoreq	"perl(Apache)"
 
 %description
-Apache::Session Perl module.
+Apache::Session is a persistence framework, particularly useful for
+tracking session data between httpd requests.  Apache::Session is designed
+to work with Apache and mod_perl, but it should work under CGI and other
+web servers, and it also works outside of a web server altogether.
 
-%description -l cs
-Modul Apache::Session pro Perl.
-
-%description -l da
-Perlmodul Apache::Session.
-
-%description -l de
-Apache::Session Perl Modul.
-
-%description -l es
-Módulo de Perl Apache::Session.
-
-%description -l fr
-Module Perl Apache::Session.
-
-%description -l it
-Modulo di Perl Apache::Session.
-
-%description -l ja
-Apache::Session Perl ¥â¥¸¥å¡¼¥ë
-
-%description -l ko
-Apache::Session ÆÞ ¸ðÁÙ.
-
-%description -l no
-Perlmodul Apache::Session.
-
-%description -l pl
-Modu³ perla Apache::Session.
-
-%description -l pt
-Módulo de Perl Apache::Session.
-
-%description -l pt_BR
-Módulo Perl Apache::Session.
-
-%description -l ru
-íÏÄÕÌØ ÄÌÑ Perl Apache::Session.
-
-%description -l sv
-Apache::Session Perlmodul.
-
-%description -l uk
-íÏÄÕÌØ ÄÌÑ Perl Apache::Session.
-
-%description -l zh_CN
-Apache::Session Perl Ä£¿é
+# %description -l pl
+# Apache::Session jest trwa³ym szkieletem...
+#
+# nie, ja siê do t³umaczeñ nie nadajê.  Dalej:
+#
+# ...szczególnie u¿ytecznym przy przekazywaniu danych pomiêdzy zapytaniami
+# HTTP.  Apache::Session zosta³ zaprojektowany do pracy z Apache i mod_perl,
+# ale dzia³a tak¿e z CGI i innymi serwerami HTTP, a tak¿e zupe³nie poza
+# serwerem HTTP.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
