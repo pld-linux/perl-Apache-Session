@@ -20,11 +20,11 @@ Summary(uk):	Модуль для Perl Apache::Session
 Summary(zh_CN):	Apache::Session Perl дё©И
 Name:		perl-Apache-Session
 Version:	1.54
-Release:	6
+Release:	7
 License:	GPL
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
-BuildRequires:	rpm-perlprov >= 3.0.3-16
+BuildRequires:	rpm-perlprov >= 4.0.2-104
 BuildRequires:	perl >= 5.6
 BuildRequires:	perl-Digest-MD5
 BuildArch:	noarch
