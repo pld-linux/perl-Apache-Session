@@ -25,13 +25,13 @@ License:	GPL
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	6d327a8388a58260e10f5f7fc1c79123
-BuildRequires:	rpm-perlprov >= 4.1-13
-BuildRequires:	perl-devel >= 5.6
 BuildRequires:	perl-Digest-MD5
+BuildRequires:	perl-devel >= 5.6
+BuildRequires:	rpm-perlprov >= 4.1-13
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_noautoreq	"perl(Apache)"
+%define		_noautoreq	'perl(Apache)'
 
 %description
 Apache::Session is a persistence framework, particularly useful for
@@ -57,9 +57,11 @@ serwerem HTTP.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
 install eg/example.perl $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
