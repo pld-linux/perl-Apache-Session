@@ -1,6 +1,6 @@
 %include	/usr/lib/rpm/macros.perl
-%define		pdir	Apache
-%define		pnam	Session
+%define	pdir	Apache
+%define	pnam	Session
 Summary:	Apache::Session - a persistence framework for session data
 Summary(pl):	Apache::Session - szkielet trwa³o¶ci dla danych w sesji
 Name:		perl-Apache-Session
