@@ -2,14 +2,13 @@
 Summary:	Apache-Session perl module
 Summary(pl):	Modu³ perla Apache-Session
 Name:		perl-Apache-Session
-Version:	1.53
+Version:	1.54
 Release:	1
 License:	GPL
 Group:		Development/Languages/Perl
 Group(de):	Entwicklung/Sprachen/Perl
 Group(pl):	Programowanie/Jêzyki/Perl
 Source0:	http://www.cpan.org/modules/by-module/Apache/Apache-Session-%{version}.tar.gz
-Patch0:		%{name}-md5.patch
 BuildRequires:	rpm-perlprov >= 3.0.3-16
 BuildRequires:	perl >= 5.6
 BuildRequires:	perl-Digest-MD5
@@ -23,7 +22,6 @@ Modu³ perla Apache-Session.
 
 %prep
 %setup -q -n Apache-Session-%{version}
-%patch0 -p1
 
 %build
 perl Makefile.PL
