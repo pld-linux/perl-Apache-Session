@@ -1,28 +1,14 @@
 %include	/usr/lib/rpm/macros.perl
 %define		pdir	Apache
 %define		pnam	Session
-Summary:	Apache::Session Perl module
-Summary(cs):	Modul Apache::Session pro Perl
-Summary(da):	Perlmodul Apache::Session
-Summary(de):	Apache::Session Perl Modul
-Summary(es):	Módulo de Perl Apache::Session
-Summary(fr):	Module Perl Apache::Session
-Summary(it):	Modulo di Perl Apache::Session
-Summary(ja):	Apache::Session Perl ¥â¥¸¥å¡¼¥ë
-Summary(ko):	Apache::Session ÆÞ ¸ðÁÙ
-Summary(nb):	Perlmodul Apache::Session
-Summary(pl):	Modu³ Perla Apache::Session
-Summary(pt):	Módulo de Perl Apache::Session
-Summary(pt_BR):	Módulo Perl Apache::Session
-Summary(ru):	íÏÄÕÌØ ÄÌÑ Perl Apache::Session
-Summary(sv):	Apache::Session Perlmodul
-Summary(uk):	íÏÄÕÌØ ÄÌÑ Perl Apache::Session
-Summary(zh_CN):	Apache::Session Perl Ä£¿é
+Summary:	Apache::Session - a persistence framework for session data
+Summary(pl):	Apache::Session - szkielet trwa³o¶ci dla danych w sesji
 Name:		perl-Apache-Session
 Version:	1.6
 Release:	1
 Epoch:		1
-License:	GPL
+# same as perl
+License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	3a373102e3ba49f93a76994c6599e1ff
