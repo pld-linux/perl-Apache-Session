@@ -10,7 +10,7 @@ Summary(fr):	Module Perl Apache::Session
 Summary(it):	Modulo di Perl Apache::Session
 Summary(ja):	Apache::Session Perl ¥â¥¸¥å¡¼¥ë
 Summary(ko):	Apache::Session ÆÞ ¸ðÁÙ
-Summary(no):	Perlmodul Apache::Session
+Summary(nb):	Perlmodul Apache::Session
 Summary(pl):	Modu³ Perla Apache::Session
 Summary(pt):	Módulo de Perl Apache::Session
 Summary(pt_BR):	Módulo Perl Apache::Session
