@@ -20,7 +20,7 @@ Summary(uk):	íÏÄÕÌØ ÄÌÑ Perl Apache::Session
 Summary(zh_CN):	Apache::Session Perl Ä£¿é
 Name:		perl-Apache-Session
 Version:	1.54
-Release:	5
+Release:	6
 License:	GPL
 Group:		Development/Languages/Perl
 Source0:	ftp://ftp.cpan.org/pub/CPAN/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
@@ -34,19 +34,17 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Apache::Session is a persistence framework, particularly useful for
-tracking session data between httpd requests.  Apache::Session is designed
-to work with Apache and mod_perl, but it should work under CGI and other
-web servers, and it also works outside of a web server altogether.
+tracking session data between httpd requests.  Apache::Session is
+designed to work with Apache and mod_perl, but it should work under
+CGI and other web servers, and it also works outside of a web server
+altogether.
 
-# %description -l pl
-# Apache::Session jest trwa³ym szkieletem...
-#
-# nie, ja siê do t³umaczeñ nie nadajê.  Dalej:
-#
-# ...szczególnie u¿ytecznym przy przekazywaniu danych pomiêdzy zapytaniami
-# HTTP.  Apache::Session zosta³ zaprojektowany do pracy z Apache i mod_perl,
-# ale dzia³a tak¿e z CGI i innymi serwerami HTTP, a tak¿e zupe³nie poza
-# serwerem HTTP.
+%description -l pl
+Apache::Session jest szkieletem trwa³o¶ci szczególnie przydatnym przy
+przekazywaniu danych pomiêdzy zapytaniami HTTP. Apache::Session
+zosta³ zaprojektowany do pracy z Apache i mod_perl, ale dzia³a
+równie¿ z CGI, z innymi serwerami HTTP, a tak¿e zupe³nie poza
+serwerem HTTP.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
@@ -67,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README CHANGES
+%doc README CHANGES TODO
 %{perl_sitelib}/Apache/Session
 %{perl_sitelib}/Apache/Session.pm
 %{_mandir}/man3/*
