@@ -1,6 +1,6 @@
 %include	/usr/lib/rpm/macros.perl
-%define	pdir	Apache
-%define	pnam	Session
+%define		pdir	Apache
+%define		pnam	Session
 Summary:	Apache::Session - a persistence framework for session data
 Summary(pl):	Apache::Session - szkielet trwa³o¶ci dla danych w sesji
 Name:		perl-Apache-Session
@@ -22,7 +22,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Apache::Session is a persistence framework, particularly useful for
-tracking session data between httpd requests.  Apache::Session is
+tracking session data between httpd requests. Apache::Session is
 designed to work with Apache and mod_perl, but it should work under
 CGI and other web servers, and it also works outside of a web server
 altogether.
