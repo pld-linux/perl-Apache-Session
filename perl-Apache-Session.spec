@@ -1,8 +1,8 @@
 %include	/usr/lib/rpm/macros.perl
 %define	pdir	Apache
 %define	pnam	Session
-Summary:	Apache-Session perl module
-Summary(pl):	Modu³ perla Apache-Session
+Summary:	Apache::Session perl module
+Summary(pl):	Modu³ perla Apache::Session
 Name:		perl-Apache-Session
 Version:	1.54
 Release:	4
@@ -16,10 +16,10 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Apache-Session perl module.
+Apache::Session perl module.
 
 %description -l pl
-Modu³ perla Apache-Session.
+Modu³ perla Apache::Session.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
