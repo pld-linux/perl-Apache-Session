@@ -4,14 +4,14 @@
 Summary:	Apache::Session - a persistence framework for session data
 Summary(pl):	Apache::Session - szkielet trwa³o¶ci dla danych w sesji
 Name:		perl-Apache-Session
-Version:	1.6
+Version:	1.80
 Release:	1
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	3a373102e3ba49f93a76994c6599e1ff
+# Source0-md5:	fbb26cc28250127efc24b9e745b934f3
 BuildRequires:	perl-Digest-MD5
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -29,10 +29,9 @@ altogether.
 
 %description -l pl
 Apache::Session jest szkieletem trwa³o¶ci szczególnie przydatnym przy
-przekazywaniu danych pomiêdzy zapytaniami HTTP. Apache::Session
-zosta³ zaprojektowany do pracy z Apache i mod_perl, ale dzia³a
-równie¿ z CGI, z innymi serwerami HTTP, a tak¿e zupe³nie poza
-serwerem HTTP.
+przekazywaniu danych pomiêdzy zapytaniami HTTP. Apache::Session zosta³
+zaprojektowany do pracy z Apache i mod_perl, ale dzia³a równie¿ z CGI,
+z innymi serwerami HTTP, a tak¿e zupe³nie poza serwerem HTTP.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
