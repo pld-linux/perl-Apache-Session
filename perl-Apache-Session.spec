@@ -2,7 +2,7 @@
 %define		pdir	Apache
 %define		pnam	Session
 Summary:	Apache::Session - a persistence framework for session data
-Summary(pl):	Apache::Session - szkielet trwa≥o∂ci dla danych w sesji
+Summary(pl.UTF-8):   Apache::Session - szkielet trwa≈Ço≈õci dla danych w sesji
 Name:		perl-Apache-Session
 Version:	1.81
 Release:	1
@@ -28,11 +28,11 @@ designed to work with Apache and mod_perl, but it should work under
 CGI and other web servers, and it also works outside of a web server
 altogether.
 
-%description -l pl
-Apache::Session jest szkieletem trwa≥o∂ci szczegÛlnie przydatnym przy
-przekazywaniu danych pomiÍdzy zapytaniami HTTP. Apache::Session zosta≥
-zaprojektowany do pracy z Apache i mod_perl, ale dzia≥a rÛwnieø z CGI,
-z innymi serwerami HTTP, a takøe zupe≥nie poza serwerem HTTP.
+%description -l pl.UTF-8
+Apache::Session jest szkieletem trwa≈Ço≈õci szczeg√≥lnie przydatnym przy
+przekazywaniu danych pomiƒôdzy zapytaniami HTTP. Apache::Session zosta≈Ç
+zaprojektowany do pracy z Apache i mod_perl, ale dzia≈Ça r√≥wnie≈º z CGI,
+z innymi serwerami HTTP, a tak≈ºe zupe≈Çnie poza serwerem HTTP.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
