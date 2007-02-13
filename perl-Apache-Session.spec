@@ -2,7 +2,7 @@
 %define		pdir	Apache
 %define		pnam	Session
 Summary:	Apache::Session - a persistence framework for session data
-Summary(pl.UTF-8):   Apache::Session - szkielet trwałości dla danych w sesji
+Summary(pl.UTF-8):	Apache::Session - szkielet trwałości dla danych w sesji
 Name:		perl-Apache-Session
 Version:	1.81
 Release:	1
