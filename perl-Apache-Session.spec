@@ -4,14 +4,14 @@
 Summary:	Apache::Session - a persistence framework for session data
 Summary(pl.UTF-8):	Apache::Session - szkielet trwałości dla danych w sesji
 Name:		perl-Apache-Session
-Version:	1.88
+Version:	1.90
 Release:	1
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
-Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.zip
-# Source0-md5:	7a191a87ab9c2f434e3691b992fa2113
+Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
+# Source0-md5:	83775326a5ca7f5a75630ec8fb793e0d
 URL:		http://search.cpan.org/dist/Apache-Session/
 BuildRequires:	perl-Digest-MD5
 BuildRequires:	perl-devel >= 1:5.8.0
