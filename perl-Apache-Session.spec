@@ -1,21 +1,34 @@
+#
+# Conditional build:
+%bcond_without	tests	# do not perform "make test"
+
 %define		pdir	Apache
 %define		pnam	Session
 Summary:	Apache::Session - a persistence framework for session data
 Summary(pl.UTF-8):	Apache::Session - szkielet trwałości dla danych w sesji
 Name:		perl-Apache-Session
 Version:	1.94
-Release:	1
+Release:	2
 Epoch:		1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/%{pdir}/%{pdir}-%{pnam}-%{version}.tar.gz
 # Source0-md5:	122b69a50cda8a22cb407d56c51a39ba
-URL:		http://search.cpan.org/dist/Apache-Session/
-BuildRequires:	perl-Digest-MD5
+Patch0:		%{name}-CVE-2025-40931.patch
+Patch1:		%{name}-CVE-2013-10075.patch
+Patch2:		%{name}-mysql-lock-result.patch
+URL:		https://metacpan.org/dist/Apache-Session
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	unzip
+%if %{with tests}
+BuildRequires:	perl-Crypt-URandom
+BuildRequires:	perl-DB_File
+BuildRequires:	perl-Test-Deep
+BuildRequires:	perl-Test-Exception
+BuildRequires:	perl-Test-Simple
+%endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -36,11 +49,16 @@ z innymi serwerami HTTP, a także zupełnie poza serwerem HTTP.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
 
 %build
 %{__perl} Makefile.PL \
 	INSTALLDIRS=vendor
 %{__make}
+
+%{?with_tests:%{__make} test}
 
 %install
 rm -rf $RPM_BUILD_ROOT

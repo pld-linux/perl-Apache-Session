@@ -1,0 +1,131 @@
+From: PLD Linux
+Subject: [PATCH] check whether GET_LOCK actually granted the lock
+
+acquire_read_lock() ran SELECT GET_LOCK(?, 3600), threw the result away and
+set $self->{lock} = 1 unconditionally. GET_LOCK returns 0 on timeout and
+NULL on error; neither is a DBI error, so the RaiseError above it does not
+catch them. After the hour elapsed the caller proceeded believing it held
+the lock.
+
+Apache::Session reads, modifies and writes the whole session blob, so two
+requests inside the same session overwrite each other - the later write
+silently discards the earlier one.
+
+Fetch the result and die when the lock was not granted. The timeout also
+stops being hardcoded, so a web application can give up sooner than an hour.
+--- Apache-Session-1.94.orig/lib/Apache/Session/Lock/MySQL.pm	2020-09-18 23:50:53.000000000 +0200
++++ Apache-Session-1.94/lib/Apache/Session/Lock/MySQL.pm	2026-08-03 22:34:40.362188658 +0200
+@@ -12,10 +12,12 @@
+ use strict;
+ 
+ use DBI;
+-use vars qw($VERSION);
++use vars qw($VERSION $LOCK_TIMEOUT);
+ 
+ $VERSION = '1.01';
+ 
++$Apache::Session::Lock::MySQL::LOCK_TIMEOUT = 3600;
++
+ sub new {
+     my $class = shift;
+     
+@@ -51,11 +53,20 @@
+     $self->{lockid} = "Apache-Session-$session->{data}->{_session_id}";
+     
+     #MySQL requires a timeout on the lock operation.  There is no option
+-    #to simply wait forever.  So we'll wait for a hour.
++    #to simply wait forever.
+     
+-    my $sth = $self->{dbh}->prepare_cached(q{SELECT GET_LOCK(?, 3600)}, {}, 1);
+-    $sth->execute($self->{lockid});
++    my $sth = $self->{dbh}->prepare_cached(q{SELECT GET_LOCK(?, ?)}, {}, 1);
++    $sth->execute($self->{lockid}, $LOCK_TIMEOUT);
++
++    #GET_LOCK returns 1 when the lock was taken, 0 on timeout and NULL on
++    #error.  Neither of the latter two is a DBI error, so RaiseError does not
++    #catch them and the caller would silently proceed without the lock.
++    my ($acquired) = $sth->fetchrow_array;
+     $sth->finish();
++
++    if (!$acquired) {
++        die "Could not acquire lock $self->{lockid}";
++    }
+     
+     $self->{lock} = 1;
+ }
+@@ -144,6 +155,14 @@
+      LockHandle => $dbh
+  };
+ 
++The lock is requested with a timeout of one hour.  If a request should give up
++sooner, lower it:
++
++ $Apache::Session::Lock::MySQL::LOCK_TIMEOUT = 60;
++
++Failing to acquire the lock within that time is fatal: proceeding without it
++would let two requests write the same session and lose each other's data.
++
+ =head1 AUTHOR
+ 
+ This module was written by Jeffrey William Baker <jwbaker@acm.org>.
+--- Apache-Session-1.94.orig/t/99mysqllockresult.t	1970-01-01 01:00:00.000000000 +0100
++++ Apache-Session-1.94/t/99mysqllockresult.t	1970-01-01 01:00:00.000000000 +0100
+@@ -0,0 +1,58 @@
++use Test::More;
++use Test::Exception;
++
++plan tests => 6;
++
++my $package = 'Apache::Session::Lock::MySQL';
++use_ok $package;
++
++#GET_LOCK reports failure in its result set, not as a DBI error, so these
++#cases need a handle that can hand back an arbitrary result
++
++{
++    package Fake::sth;
++    sub new       { my ($class, @row) = @_; return bless { row => [@row] }, $class }
++    sub execute   { my $self = shift; $self->{bound} = [@_]; return 1 }
++    sub fetchrow_array { return @{ $_[0]->{row} } }
++    sub finish    { return 1 }
++
++    package Fake::dbh;
++    sub new { my ($class, @row) = @_; return bless { row => [@row] }, $class }
++    sub prepare_cached {
++        my ($self, $sql) = @_;
++        $self->{sql} = $sql;
++        return $self->{sth} = Fake::sth->new(@{ $self->{row} });
++    }
++}
++
++sub session_for {
++    my $dbh = shift;
++    return {
++        args => { LockHandle => $dbh },
++        data => { _session_id => 'deadbeef' },
++    };
++}
++
++{
++    local $Apache::Session::Lock::MySQL::LOCK_TIMEOUT = 42;
++
++    my $dbh = Fake::dbh->new(1);
++    my $locker = $package->new;
++    lives_ok { $locker->acquire_read_lock(session_for($dbh)) } 'lock granted';
++    is $locker->{lock}, 1, 'locker records that it holds the lock';
++    is $dbh->{sth}->{bound}->[1], 42, 'the configured timeout is used';
++}
++
++{
++    my $dbh = Fake::dbh->new(0);
++    my $locker = $package->new;
++    dies_ok { $locker->acquire_read_lock(session_for($dbh)) }
++            'timed-out lock is fatal';
++}
++
++{
++    my $dbh = Fake::dbh->new(undef);
++    my $locker = $package->new;
++    dies_ok { $locker->acquire_read_lock(session_for($dbh)) }
++            'NULL from GET_LOCK is fatal';
++}
